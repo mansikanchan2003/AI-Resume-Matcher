@@ -1,0 +1,29 @@
+Software engineer resume with 3 years Python experience.
+Jane Doe | jane.doe@email.com | github.com/janedoe
+
+EXPERIENCE
+----------
+Backend Engineer, TechCorp (2022 - Present)
+- Built RESTful APIs using Python and FastAPI serving 500K+ daily requests.
+- Optimised PostgreSQL queries and wrote complex migrations, improving
+  average response time by 40%.
+- Collaborated with frontend team in an Agile/Scrum environment across
+  3-week sprint cycles.
+- Implemented JWT-based authentication and role-based access control.
+
+Junior Developer, StartupXYZ (2021 - 2022)
+- Developed Django-based internal tooling for the operations team.
+- Wrote unit tests using pytest, achieving 85% code coverage.
+- Participated in daily standups and sprint retrospectives.
+
+SKILLS
+------
+Languages  : Python, SQL, JavaScript (basic)
+Frameworks : FastAPI, Django, SQLAlchemy
+Databases  : PostgreSQL, SQLite
+Tools      : Git, GitHub, Linux CLI, pytest
+Soft Skills: Cross-functional communication, Agile/Scrum
+
+EDUCATION
+---------
+B.Sc. Computer Science, State University, 2021

@@ -1,0 +1,32 @@
+Senior Backend Engineer — Cloud Platform Team
+TechNova Inc. | Remote | Full-time
+
+ABOUT THE ROLE
+We are looking for a Senior Backend Engineer to join our Platform team,
+building the infrastructure that powers TechNova's core product serving
+2M+ users globally.
+
+RESPONSIBILITIES
+- Design and develop scalable Python microservices.
+- Own the deployment and monitoring of containerised services on AWS.
+- Write comprehensive unit and integration tests (target: 90% coverage).
+- Collaborate with cross-functional squads in a fast-paced Agile environment.
+- Mentor junior engineers and conduct code reviews.
+
+REQUIREMENTS (Must Have)
+- 4+ years of professional Python backend development experience.
+- Strong experience with FastAPI or similar async Python frameworks.
+- Proficiency with Docker and container orchestration (Kubernetes preferred).
+- Hands-on experience with AWS services (ECS, S3, Lambda, RDS).
+- Expert-level SQL skills with PostgreSQL in production environments.
+- Experience designing and consuming RESTful APIs.
+
+NICE TO HAVE (Preferred)
+- Experience with Redis or Memcached for caching.
+- Familiarity with Terraform or infrastructure-as-code tools.
+- Prior experience in a SaaS or high-growth startup environment.
+
+SOFT SKILLS
+- Strong written and verbal communication.
+- Ability to operate independently with ambiguous requirements.
+- Passion for mentoring and knowledge sharing.

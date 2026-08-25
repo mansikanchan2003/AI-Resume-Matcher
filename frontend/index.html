@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI-powered resume and job description matcher. Get instant match scores, skill gap analysis, and personalised interview prep." />
+  <title>AI Resume Matcher | Match Your Resume to Any Job</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ── HEADER ─────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">ResumeAI</span>
+      </div>
+      <nav class="header-nav">
+        <a href="#upload-section">Analyse</a>
+        <a href="#results-section">Results</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── HERO ───────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title">Match Your Resume to <span class="gradient-text">Any Job</span></h1>
+      <p class="hero-subtitle">
+        Get an AI-powered match score, skill gap analysis, STAR-format resume
+        improvements, and tailored interview questions — in seconds.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── UPLOAD SECTION ─────────────────────────────────────── -->
+  <main id="upload-section" class="container upload-section">
+
+    <!-- Resume Upload -->
+    <div class="card upload-card" id="resume-upload-card">
+      <h2 class="card-title">📄 Upload Your Resume</h2>
+      <div class="dropzone" id="resume-dropzone" role="button" tabindex="0"
+           aria-label="Click or drag your resume here to upload">
+        <p class="dropzone-hint">Drag & drop or <span class="link-text">browse</span></p>
+        <p class="dropzone-formats">Supports PDF, DOCX, TXT</p>
+        <input type="file" id="resume-file-input" accept=".pdf,.docx,.txt"
+               class="hidden-input" aria-hidden="true" />
+      </div>
+      <p class="file-status" id="resume-file-status" aria-live="polite"></p>
+    </div>
+
+    <!-- JD Input -->
+    <div class="card jd-card">
+      <h2 class="card-title">📋 Paste Job Description</h2>
+      <textarea
+        id="jd-textarea"
+        class="jd-textarea"
+        placeholder="Paste the full job description here..."
+        rows="12"
+        aria-label="Job description text area"
+      ></textarea>
+    </div>
+
+    <!-- Analyse Button -->
+    <div class="action-row">
+      <button id="analyse-btn" class="btn btn-primary" aria-label="Run AI analysis">
+        <span id="btn-label">✨ Analyse Match</span>
+        <span id="btn-spinner" class="spinner hidden" aria-hidden="true"></span>
+      </button>
+      <p class="error-msg hidden" id="error-msg" role="alert"></p>
+    </div>
+  </main>
+
+  <!-- ── RESULTS SECTION ────────────────────────────────────── -->
+  <section id="results-section" class="container results-section hidden">
+
+    <!-- Score Card -->
+    <div class="card score-card" id="score-card">
+      <div class="score-ring-wrapper">
+        <svg class="score-ring" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="score-ring-bg" cx="60" cy="60" r="50" />
+          <circle class="score-ring-fill" id="score-ring-fill" cx="60" cy="60" r="50" />
+        </svg>
+        <div class="score-number" id="score-number">--</div>
+      </div>
+      <div class="score-meta">
+        <h2 class="score-label">Match Score</h2>
+        <span class="seniority-badge" id="seniority-badge">--</span>
+        <p class="executive-summary" id="executive-summary"></p>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" role="tab" data-tab="skills"
+              aria-selected="true" id="tab-skills">Skills</button>
+      <button class="tab-btn" role="tab" data-tab="gaps"
+              aria-selected="false" id="tab-gaps">Gaps</button>
+      <button class="tab-btn" role="tab" data-tab="improvements"
+              aria-selected="false" id="tab-improvements">Improvements</button>
+      <button class="tab-btn" role="tab" data-tab="interview"
+              aria-selected="false" id="tab-interview">Interview Prep</button>
+    </div>
+
+    <!-- Tab Panels -->
+    <div id="panel-skills"       class="tab-panel card" role="tabpanel" aria-labelledby="tab-skills"></div>
+    <div id="panel-gaps"         class="tab-panel card hidden" role="tabpanel" aria-labelledby="tab-gaps"></div>
+    <div id="panel-improvements" class="tab-panel card hidden" role="tabpanel" aria-labelledby="tab-improvements"></div>
+    <div id="panel-interview"    class="tab-panel card hidden" role="tabpanel" aria-labelledby="tab-interview"></div>
+
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>Built with FastAPI · Python · Gemini AI &nbsp;·&nbsp; Portfolio Project</p>
+    </div>
+  </footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
+
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

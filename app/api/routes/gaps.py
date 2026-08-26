@@ -1,7 +1,7 @@
 """
 app/api/routes/gaps.py
 
-Missing Skill & Gap Detection Endpoint.
+API routes for resume and job-description gap detection.
 """
 
 from fastapi import APIRouter
@@ -15,6 +15,11 @@ from app.services.llm_service import LLMService
 router = APIRouter()
 
 
+analysis_service = AnalysisService(
+    llm=LLMService()
+)
+
+
 @router.post(
     "/detect-gaps",
     response_model=GapDetectionResponse,
@@ -23,10 +28,6 @@ async def detect_gaps(
     payload: GapDetectionRequest,
 ):
     """Detect missing skills and experience discrepancies."""
-
-    analysis_service = AnalysisService(
-        llm=LLMService()
-    )
 
     result = await analysis_service.run_gap_detection(
         resume_text=payload.resume_text,

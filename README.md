@@ -3,6 +3,11 @@
 An AI-powered **Resume & Job Description Matching Platform** built with **FastAPI** and **Google Gemini**.
 
 The application analyzes a candidate's resume against a job description to evaluate role fit, identify matched skills and skill gaps, generate targeted resume improvements, prepare interview questions, and perform an AI-assisted first-pass screening workflow for recruiter review.
+---
+## 🌐 Live Demo
+**Live Application:** [AI Resume & JD Matcher](https://ai-resume-matcher-fq06.onrender.com)
+The application is deployed as a FastAPI service and exposes the frontend and API through the deployed application.
+> **Note:** AI-powered features require a valid Gemini API configuration.
 
 ---
 
@@ -80,6 +85,58 @@ It does not make a final hiring, rejection, or compensation decision.
 
 ---
 
+## 🖥️ Application Screenshots
+
+### 🏠 Home Page
+
+The application provides a simple interface for comparing a candidate's resume with a target job description.
+
+![AI Resume & JD Matcher Home Page](docs/images/home-page.png)
+
+### 📄 Resume Upload
+
+Candidates can provide their resume for AI-powered analysis.
+
+![Resume Upload](docs/images/resume-upload.png)
+
+### 💼 Job Description
+
+Enter the target job description to evaluate candidate-role alignment.
+
+![Job Description](docs/images/job-description.png)
+
+### 📊 Match Score
+
+The platform generates an overall match score and summarizes the candidate's alignment with the target role.
+
+![Match Score](docs/images/match-score.png)
+
+### 🎯 Matched Skills
+
+The system identifies technical and soft skills supported by both the resume and job description.
+
+![Matched Skills](docs/images/matched-skills.png)
+
+### 🔎 Skill Gaps
+
+Missing or weakly supported requirements are highlighted to help identify areas that may require further review.
+
+![Skill Gaps](docs/images/skill-gaps.png)
+
+### ✍️ Resume Improvement Suggestions
+
+The AI generates targeted recommendations for improving the resume for the selected role.
+
+![Resume Improvement Suggestions](docs/images/improvement-suggestions.png)
+
+### 💬 Interview Preparation
+
+The platform generates role-specific interview preparation material, including technical and behavioural questions.
+
+![Interview Preparation](docs/images/interview-preparation.png)
+
+---
+
 ## 🔄 AI Screening Workflow
 
 The screening workflow is designed as a bounded, human-in-the-loop process:
@@ -107,11 +164,11 @@ Candidate Resume / Profile
           Interview Preparation
                     │
                     ▼
-        Structured Evaluation
+          Structured Evaluation
                     │
                     ▼
-          Risk & Verification
-             Assessment
+         Risk & Verification
+              Assessment
                     │
                     ▼
           Human Recruiter Review
@@ -134,7 +191,7 @@ The application follows a modular service-oriented architecture.
              ┌──────────────┼──────────────┐
              │              │              │
              ▼              ▼              ▼
-        Feature Routes   Screening Route   Health
+        Feature Routes  Screening Route   Health
              │              │
              │              ▼
              │       Screening Worker
@@ -142,7 +199,7 @@ The application follows a modular service-oriented architecture.
              │       ┌──────┼──────┐
              │       │      │      │
              │       ▼      ▼      ▼
-             │   Analysis Matching Gaps
+             │    Analysis Matching Gaps
              │       │      │      │
              │       └──────┼──────┘
              │              │
@@ -159,7 +216,7 @@ The application follows a modular service-oriented architecture.
                      Google Gemini
                             │
                             ▼
-                  Pydantic Validation
+                   Pydantic Validation
                             │
                             ▼
                   Structured AI Output
@@ -284,6 +341,17 @@ AI-Resume-Matcher/
 │   └── test_services/
 │       └── test_llm_service.py
 │
+├── docs/
+│   └── images/
+│       ├── home-page.png
+│       ├── resume-upload.png
+│       ├── job-description.png
+│       ├── match-score.png
+│       ├── matched-skills.png
+│       ├── skill-gaps.png
+│       ├── improvement-suggestions.png
+│       └── interview-preparation.png
+│
 ├── AI_Screening_Worker_Assignment.md
 ├── .env.example
 ├── .gitignore
@@ -321,14 +389,30 @@ When the application is running, FastAPI provides interactive API documentation.
 
 ### Swagger UI
 
+Local:
+
 ```text
 http://127.0.0.1:8000/docs
 ```
 
+Deployed:
+
+```text
+https://ai-resume-matcher-fq06.onrender.com/docs
+```
+
 ### OpenAPI Specification
+
+Local:
 
 ```text
 http://127.0.0.1:8000/openapi.json
+```
+
+Deployed:
+
+```text
+https://ai-resume-matcher-fq06.onrender.com/openapi.json
 ```
 
 Swagger UI can be used to:
@@ -375,21 +459,37 @@ The screening endpoint returns a structured evaluation containing information su
 
 ```text
 Match Score
+
 Recommendation
+
 Seniority Alignment
+
 Executive Summary
+
 Strengths
+
 Matched Technical Skills
+
 Matched Soft Skills
+
 Critical Gaps
+
 Secondary Gaps
+
 Experience Discrepancies
+
 Risks
+
 Resume Improvements
+
 Interview Preparation
+
 Information Requiring Verification
+
 Next Steps
+
 Escalation Status
+
 Escalation Reason
 ```
 
@@ -446,6 +546,7 @@ Potentially significant concerns are surfaced for recruiter verification.
 
 ```bash
 git clone https://github.com/mansikanchan2003/AI-Resume-Matcher.git
+
 cd AI-Resume-Matcher
 ```
 
@@ -477,12 +578,14 @@ Create the `.env` file from the example:
 Copy-Item .env.example .env
 ```
 
-Then configure the Gemini API credentials:
+Then configure your Gemini API credentials.
+
+Example:
 
 ```env
 LLM_PROVIDER=gemini
 LLM_API_KEY=your_api_key_here
-LLM_MODEL_NAME=gemini-3.6-flash
+LLM_MODEL_NAME=your_configured_model
 LLM_TEMPERATURE=0.0
 LLM_MAX_TOKENS=4096
 ```
@@ -538,7 +641,7 @@ The test suite covers:
 * Prompt templates
 * LLM service behaviour
 
-The current test run also reports a dependency deprecation warning from Starlette's multipart import; it does not cause test failures.
+> **Note:** The current test run may report a dependency deprecation warning from Starlette's multipart import. This warning does not cause test failures.
 
 ---
 
@@ -703,7 +806,7 @@ Potential future enhancements include:
 * Multiple LLM provider support
 * Streaming AI responses
 * Advanced ATS keyword analysis
-* Production deployment
+* Production hardening and scalability
 * Automated resume rewriting
 * Job application tracking
 * Recruiter dashboard
@@ -716,12 +819,8 @@ Potential future enhancements include:
 **Mansi Kanchan**
 
 B.Tech — Computer Science & Engineering
-
-GitHub:
-[https://github.com/mansikanchan2003](https://github.com/mansikanchan2003)
-
-LinkedIn:
-[https://www.linkedin.com/in/mansi-kanchan-7924b0196](https://www.linkedin.com/in/mansi-kanchan-7924b0196)
+GitHub: [github.com/mansikanchan2003](https://github.com/mansikanchan2003)
+LinkedIn: [linkedin.com/in/mansi-kanchan-7924b0196](https://www.linkedin.com/in/mansi-kanchan-7924b0196)
 
 ---
 

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AI-powered resume and job description matcher. Get instant match scores, skill gap analysis, and personalised interview prep." />
+  <meta name="description"
+    content="AI-powered resume and job description matcher. Get instant match scores, skill gap analysis, and personalised interview prep." />
   <title>AI Resume Matcher | Match Your Resume to Any Job</title>
+  <link rel="icon" href="/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
+
 <body>
 
   <!-- ── HEADER ─────────────────────────────────────────────── -->
@@ -43,11 +47,10 @@
     <div class="card upload-card" id="resume-upload-card">
       <h2 class="card-title">📄 Upload Your Resume</h2>
       <div class="dropzone" id="resume-dropzone" role="button" tabindex="0"
-           aria-label="Click or drag your resume here to upload">
+        aria-label="Click or drag your resume here to upload">
         <p class="dropzone-hint">Drag & drop or <span class="link-text">browse</span></p>
         <p class="dropzone-formats">Supports PDF, DOCX, TXT</p>
-        <input type="file" id="resume-file-input" accept=".pdf,.docx,.txt"
-               class="hidden-input" aria-hidden="true" />
+        <input type="file" id="resume-file-input" accept=".pdf,.docx,.txt" class="hidden-input" aria-hidden="true" />
       </div>
       <p class="file-status" id="resume-file-status" aria-live="polite"></p>
     </div>
@@ -55,13 +58,8 @@
     <!-- JD Input -->
     <div class="card jd-card">
       <h2 class="card-title">📋 Paste Job Description</h2>
-      <textarea
-        id="jd-textarea"
-        class="jd-textarea"
-        placeholder="Paste the full job description here..."
-        rows="12"
-        aria-label="Job description text area"
-      ></textarea>
+      <textarea id="jd-textarea" class="jd-textarea" placeholder="Paste the full job description here..." rows="12"
+        aria-label="Job description text area"></textarea>
     </div>
 
     <!-- Analyse Button -->
@@ -95,21 +93,19 @@
 
     <!-- Tabs -->
     <div class="tabs" role="tablist">
-      <button class="tab-btn active" role="tab" data-tab="skills"
-              aria-selected="true" id="tab-skills">Skills</button>
-      <button class="tab-btn" role="tab" data-tab="gaps"
-              aria-selected="false" id="tab-gaps">Gaps</button>
-      <button class="tab-btn" role="tab" data-tab="improvements"
-              aria-selected="false" id="tab-improvements">Improvements</button>
-      <button class="tab-btn" role="tab" data-tab="interview"
-              aria-selected="false" id="tab-interview">Interview Prep</button>
+      <button class="tab-btn active" role="tab" data-tab="skills" aria-selected="true" id="tab-skills">Skills</button>
+      <button class="tab-btn" role="tab" data-tab="gaps" aria-selected="false" id="tab-gaps">Gaps</button>
+      <button class="tab-btn" role="tab" data-tab="improvements" aria-selected="false"
+        id="tab-improvements">Improvements</button>
+      <button class="tab-btn" role="tab" data-tab="interview" aria-selected="false" id="tab-interview">Interview
+        Prep</button>
     </div>
 
     <!-- Tab Panels -->
-    <div id="panel-skills"       class="tab-panel card" role="tabpanel" aria-labelledby="tab-skills"></div>
-    <div id="panel-gaps"         class="tab-panel card hidden" role="tabpanel" aria-labelledby="tab-gaps"></div>
+    <div id="panel-skills" class="tab-panel card" role="tabpanel" aria-labelledby="tab-skills"></div>
+    <div id="panel-gaps" class="tab-panel card hidden" role="tabpanel" aria-labelledby="tab-gaps"></div>
     <div id="panel-improvements" class="tab-panel card hidden" role="tabpanel" aria-labelledby="tab-improvements"></div>
-    <div id="panel-interview"    class="tab-panel card hidden" role="tabpanel" aria-labelledby="tab-interview"></div>
+    <div id="panel-interview" class="tab-panel card hidden" role="tabpanel" aria-labelledby="tab-interview"></div>
 
   </section>
 
@@ -120,11 +116,12 @@
     </div>
   </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
 
-<script src="js/api.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
 </body>
+
 </html>

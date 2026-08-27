@@ -2,129 +2,114 @@
 
 An AI-powered **Resume & Job Description Matching Platform** built with **FastAPI** and **Google Gemini**.
 
-The system analyzes a candidate's resume against a job description to evaluate overall fit, identify matching and missing skills, suggest targeted resume improvements, and generate interview preparation questions.
+The application analyzes a candidate's resume against a job description to evaluate overall fit, identify matched and missing skills, recommend targeted resume improvements, and generate interview preparation questions.
 
 ---
 
 ## ✨ Features
 
-### 🧠 Resume vs. Job Description Analysis
+### 📊 Resume vs. Job Description Analysis
 
-Generates a structured assessment of how well a resume aligns with a job description.
+Evaluates how well a candidate's resume aligns with a job description.
 
-* Match score from **0–100**
-* Seniority alignment
-* Executive summary
-* Top candidate strengths
-* Major concerns
+- Match score from **0–100**
+- Seniority alignment
+- Executive summary
+- Top candidate strengths
+- Major concerns
 
 ### 🎯 Skill Matching
 
-Identifies technical and soft skills shared between the resume and job description.
+Identifies skills shared between the resume and job description.
 
-* Matched technical skills
-* Resume evidence for each technical skill
-* Corresponding JD requirements
-* Matched soft skills
+- Matched technical skills
+- Resume evidence for each technical skill
+- Corresponding JD requirements
+- Matched soft skills
 
 ### 🔍 Skill & Experience Gap Detection
 
 Identifies areas where the candidate may not fully satisfy the job requirements.
 
-* Critical missing skills
-* Secondary missing skills
-* Experience discrepancies
-* Relevant job-description clauses
+- Critical missing skills
+- Secondary missing skills
+- Experience discrepancies
+- Relevant job-description clauses
 
 ### ✍️ AI Resume Improvements
 
 Generates targeted recommendations to improve resume relevance and ATS compatibility.
 
-* Tailored summary statement
-* STAR-based bullet recommendations
-* Target skills
-* Suggested resume bullets
-* Improvement reasoning
-* High-value keywords
+- Tailored summary statement
+- STAR-based bullet recommendations
+- Target skills
+- Suggested resume bullets
+- Improvement reasoning
+- High-value keywords
 
 ### 💼 AI Interview Preparation
 
 Generates interview questions based on the target job and identified skill gaps.
 
-* Technical interview questions
-* Behavioural interview questions
-* Focus areas and competencies
-* Evaluation criteria
+- Technical interview questions
+- Behavioural interview questions
+- Focus areas and competencies
+- Evaluation criteria
 
 ---
 
 ## 🏗️ Architecture
 
 ```text
-Resume + Job Description
-          │
-          ▼
-     FastAPI API
-          │
-          ├───────────────┬───────────────┐
-          ▼               ▼               ▼
+                 Resume + Job Description
+                           │
+                           ▼
+                      FastAPI API
+                           │
+          ┌────────────────┼────────────────┐
+          ▼                ▼                ▼
    Resume Analysis   Skill Matching   Gap Detection
-          │               │               │
-          └───────────────┼───────────────┘
-                          ▼
-                  Analysis Service
-                          │
-                          ▼
-                     Gemini LLM
-                          │
-             ┌────────────┼────────────┐
-             ▼            ▼            ▼
-       Improvements   Interview     Structured
-          │             Prep          Output
-          └──────────────┴────────────┘
-```
+          │                │                │
+          └────────────────┼────────────────┘
+                           ▼
+                   Analysis Service
+                           │
+                           ▼
+                      Gemini LLM
+                           │
+             ┌─────────────┼─────────────┐
+             ▼             ▼             ▼
+       Improvements    Interview     Structured
+                          Prep          Output
 
----
+The application follows a modular service-oriented architecture where routes handle HTTP requests, services contain application and LLM logic, prompts isolate AI instructions, and Pydantic models validate structured outputs.
 
-## 🛠️ Tech Stack
-
-### Backend
-
-* **Python**
-* **FastAPI**
-* **Pydantic**
-* **Uvicorn**
-
-### AI / LLM
-
-* **Google Gemini API**
-* Prompt-based structured AI generation
-* Pydantic-based response validation
-
-### Frontend
-
-* **HTML**
-* **CSS**
-* **JavaScript**
-
-### Testing
-
-* **Pytest**
-* API route tests
-* Service tests
-* Prompt template tests
-
-### Development Tools
-
-* **Git**
-* **GitHub**
-* **VS Code**
-
----
-
-## 📂 Project Structure
-
-```text
+🛠️ Tech Stack
+Backend
+Python
+FastAPI
+Pydantic
+Uvicorn
+AI / LLM
+Google Gemini API
+Prompt-based structured AI generation
+Pydantic-based response validation
+Frontend
+HTML
+CSS
+JavaScript
+Testing & Code Quality
+Pytest
+Pytest-Asyncio
+Pyrefly
+API route tests
+Service tests
+Prompt template tests
+Development Tools
+Git
+GitHub
+Antigravity IDE
+📂 Project Structure
 AI-Resume-Matcher/
 │
 ├── app/
@@ -185,223 +170,218 @@ AI-Resume-Matcher/
 ├── .env.example
 ├── .gitignore
 ├── main.py
-└── requirements.txt
-```
-
----
-
-## 🔌 API Endpoints
+├── pyrefly.toml
+├── requirements.txt
+└── README.md
+🔌 API Endpoints
 
 All API endpoints are versioned under:
 
-```text
 /api/v1/
-```
+Feature	Method	Endpoint	Input
+Resume Analysis	POST	/api/v1/analysis/analyse	Form Data
+Skill Matching	POST	/api/v1/matching/match-skills	JSON
+Gap Detection	POST	/api/v1/gaps/detect-gaps	JSON
+Resume Improvements	POST	/api/v1/improvements/suggest	JSON
+Interview Preparation	POST	/api/v1/interview/generate	JSON
+Health Check	GET	/health	—
+📖 API Documentation
 
-| Feature               | Method | Endpoint                        |
-| --------------------- | ------ | ------------------------------- |
-| Resume Analysis       | POST   | `/api/v1/analysis/analyse`      |
-| Skill Matching        | POST   | `/api/v1/matching/match-skills` |
-| Gap Detection         | POST   | `/api/v1/gaps/detect-gaps`      |
-| Resume Improvements   | POST   | `/api/v1/improvements/suggest`  |
-| Interview Preparation | POST   | `/api/v1/interview/generate`    |
+When the application is running, FastAPI provides interactive API documentation.
 
----
+Swagger UI
+http://127.0.0.1:8000/docs
+OpenAPI Specification
+http://127.0.0.1:8000/openapi.json
 
-## 📊 Structured AI Output
+Swagger UI can be used to:
 
-The application uses **Pydantic response models** to keep LLM-generated results structured and predictable.
+Inspect available endpoints
+View request schemas
+Submit test requests
+Inspect structured responses
+Verify validation behaviour
+📊 Structured AI Output
 
-For example, the resume analysis response contains:
+The application uses Pydantic response models to keep LLM-generated results structured and predictable.
 
-```json
+Example analysis response:
+
 {
-  "match_score": 85,
+  "match_score": 78,
   "seniority_alignment": "Well-Matched",
-  "executive_summary": "The candidate demonstrates strong alignment with the role.",
+  "executive_summary": "The candidate is a strong fit for the target role, with strong alignment across the core backend development requirements.",
   "top_strengths": [
-    "Java development",
-    "API integration",
-    "Problem solving"
+    "Python and FastAPI experience",
+    "REST API development",
+    "Git and GitHub experience"
   ],
   "major_concerns": [
-    "Limited experience with the required cloud platform"
+    "No explicit PostgreSQL experience",
+    "No mentioned Docker experience"
   ]
 }
-```
 
-This structured approach makes AI responses easier for the frontend and API consumers to process.
+This structured approach allows the frontend and API consumers to reliably process AI-generated results.
 
----
-
-## 🚀 Getting Started
-
-### 1. Clone the repository
-
-```bash
+🚀 Getting Started
+1. Clone the repository
 git clone https://github.com/mansikanchan2003/AI-Resume-Matcher.git
 cd AI-Resume-Matcher
-```
-
-### 2. Create a virtual environment
+2. Create a virtual environment
 
 For Windows:
 
-```powershell
 python -m venv venv
-```
 
-Activate the virtual environment:
+Activate it:
 
-```powershell
 .\venv\Scripts\Activate.ps1
-```
-
-### 3. Install dependencies
-
-```bash
+3. Install dependencies
 pip install -r requirements.txt
-```
+4. Configure environment variables
 
-### 4. Configure environment variables
+Create the .env file:
 
-Create a `.env` file from the provided template:
-
-```powershell
 Copy-Item .env.example .env
-```
 
-Then add your Gemini API credentials to `.env`.
+Then configure the required Gemini API credentials.
 
-> **Important:** Never commit your real `.env` file or API keys to GitHub.
+Example:
 
-### 5. Start the application
+LLM_PROVIDER=gemini
+LLM_API_KEY=your_api_key_here
+LLM_MODEL_NAME=gemini-3.6-flash
+LLM_TEMPERATURE=0.0
+LLM_MAX_TOKENS=4096
 
-```bash
+Important: Never commit the real .env file or API keys to GitHub.
+
+5. Start the application
 uvicorn main:app --reload
-```
 
 The API will be available at:
 
-```text
 http://127.0.0.1:8000
-```
 
----
+Open Swagger UI:
 
-## 📖 API Documentation
-
-FastAPI automatically provides interactive API documentation.
-
-Once the server is running, open:
-
-```text
 http://127.0.0.1:8000/docs
-```
+🧪 Running Tests
 
-Swagger UI allows you to:
+Run the complete test suite:
 
-* Inspect available endpoints
-* View request schemas
-* Submit test requests
-* Inspect structured responses
+pytest -q
 
----
+Current test status:
 
-## 🧪 Running Tests
+7 passed
 
-Run the test suite with:
+The tests cover:
 
-```bash
-pytest
-```
+API route behaviour
+Request validation
+Skill matching
+Gap detection
+Resume improvements
+Interview question generation
+🔎 Static Type Checking
 
-The project includes tests covering:
+The project uses Pyrefly for static analysis.
 
-* API routes
-* Prompt templates
-* LLM service behavior
+Run:
 
----
+pyrefly check
 
-## 📝 Example Analysis Request
+Expected result:
 
-The main analysis endpoint accepts resume and job-description text as form data.
+INFO 0 errors
+📝 API Request Examples
+Resume Analysis
 
-```bash
+The analysis endpoint accepts form data:
+
 curl -X POST \
   "http://127.0.0.1:8000/api/v1/analysis/analyse" \
   -H "accept: application/json" \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "resume_text=Your resume text here..." \
   -d "jd_text=Your job description here..."
-```
+Skill Matching
 
----
+The remaining analysis endpoints accept JSON request bodies.
 
-## 🔐 Environment Variables
+Example:
 
-The project uses environment variables for configuration.
+curl -X POST \
+  "http://127.0.0.1:8000/api/v1/matching/match-skills" \
+  -H "accept: application/json" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "resume_text": "Your resume text here...",
+    "jd_text": "Your job description here..."
+  }'
 
-A template is provided in:
+The same JSON-based approach is used by:
 
-```text
+/api/v1/gaps/detect-gaps
+/api/v1/improvements/suggest
+/api/v1/interview/generate
+🔐 Environment Variables
+
+The application uses environment variables for configuration.
+
+The repository provides:
+
 .env.example
-```
 
-The real `.env` file should remain local and should **never be committed** to the repository.
+The actual .env file is intentionally excluded from Git through .gitignore.
 
----
+Never commit:
 
-## 🎯 Design Approach
+API keys
+Secrets
+Credentials
+Local environment configuration
+🎯 Design Approach
 
-The application follows a modular service-oriented architecture.
+The application is designed around separation of responsibilities:
 
-* **Routes** handle HTTP requests and responses.
-* **Pydantic models** validate request data and structure AI responses.
-* **Services** contain application and LLM logic.
-* **Prompt modules** isolate AI instructions for each capability.
-* **Utilities** handle validation and text processing.
-* **Tests** provide coverage for routes, prompts, and services.
+Routes handle HTTP requests and responses.
+Pydantic models validate request data and structure AI responses.
+Services contain application and LLM logic.
+Prompt modules isolate AI instructions for each capability.
+Utilities handle text processing and validation.
+Tests verify API and service behaviour.
+Pyrefly provides static code analysis.
 
-This separation makes the application easier to maintain, test, and extend.
+This structure makes the application easier to test, maintain, and extend.
 
----
-
-## 🔮 Future Improvements
+🔮 Future Improvements
 
 Potential future enhancements include:
 
-* Resume PDF/DOCX upload and extraction
-* User authentication
-* Persistent analysis history
-* Job recommendation system
-* Resume scoring dashboard
-* Multiple LLM provider support
-* Streaming AI responses
-* Advanced ATS keyword analysis
-* Production deployment
-* Automated resume rewriting
-* Job application tracking
+Resume PDF/DOCX upload and extraction
+User authentication
+Persistent analysis history
+Job recommendation system
+Resume scoring dashboard
+Multiple LLM provider support
+Streaming AI responses
+Advanced ATS keyword analysis
+Production deployment
+Automated resume rewriting
+Job application tracking
+👩‍💻 Author
 
----
-
-## 👩‍💻 Author
-
-**Mansi Kanchan**
+Mansi Kanchan
 
 B.Tech — Computer Science & Engineering
 
-* GitHub: [@mansikanchan2003](https://github.com/mansikanchan2003)
-* LinkedIn: [Mansi Kanchan](https://www.linkedin.com/in/mansi-kanchan-7924b0196)
-
----
-
-## ⭐ Project Goal
+GitHub: https://github.com/mansikanchan2003
+LinkedIn: https://www.linkedin.com/in/mansi-kanchan-7924b0196
+⭐ Project Goal
 
 The goal of this project is to demonstrate how modern AI/LLM capabilities can be integrated into a structured backend application to solve a practical problem:
 
-> **Helping candidates understand how well their resume matches a job, identify gaps, improve their resume, and prepare for interviews.**
-
-If you find the project useful, consider giving it a ⭐ on GitHub.
-
+Helping candidates understand how well their resume matches a job, identify skill gaps, improve their resume, and prepare for interviews.

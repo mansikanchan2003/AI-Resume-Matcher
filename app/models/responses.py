@@ -89,3 +89,56 @@ class BehaviouralQuestion(BaseModel):
 class InterviewQuestionsResponse(BaseModel):
     technical_questions: list[TechnicalQuestion]
     behavioural_questions: list[BehaviouralQuestion]
+
+# ─────────────────────────────────────────────────────────────
+# AI Screening Worker
+# ─────────────────────────────────────────────────────────────
+
+class ScreeningEvaluationResponse(BaseModel):
+    """
+    Structured output produced by the AI-assisted screening worker.
+
+    The worker supports recruiter decision-making and does not make
+    a final hiring or rejection decision.
+    """
+
+    match_score: int = Field(..., ge=0, le=100)
+
+    recommendation: Literal[
+        "Proceed to Human Review",
+        "Needs More Information",
+    ]
+
+    seniority_alignment: Literal[
+        "Underqualified",
+        "Well-Matched",
+        "Overqualified",
+    ]
+
+    executive_summary: str
+
+    strengths: list[str]
+
+    matched_technical_skills: list[MatchedTechnicalSkill]
+
+    matched_soft_skills: list[str]
+
+    critical_gaps: list[CriticalMissingSkill]
+
+    secondary_gaps: list[CriticalMissingSkill]
+
+    experience_discrepancies: list[str]
+
+    risks: list[str]
+
+    resume_improvements: ImprovementResponse
+
+    interview_preparation: InterviewQuestionsResponse
+
+    information_requiring_verification: list[str]
+
+    next_steps: list[str]
+
+    escalation_required: bool
+
+    escalation_reason: str | None

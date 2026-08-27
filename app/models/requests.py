@@ -47,3 +47,20 @@ class InterviewRequest(BaseModel):
     jd_text: str
     matched_skills: list[str] = Field(default_factory=list)
     missing_skills: list[dict] = Field(default_factory=list)
+
+class ScreeningWorkerRequest(BaseModel):
+    resume_text: str = Field(
+        ...,
+        min_length=100,
+        description="Candidate resume/profile text.",
+    )
+    jd_text: str = Field(
+        ...,
+        min_length=50,
+        description="Target job description text.",
+    )
+    job_title: str = Field(
+        ...,
+        min_length=2,
+        description="Target job title.",
+    )

@@ -162,89 +162,47 @@
       }
 
       // --------------------------------------------------------
-      // 2. High-level analysis
+      // 2. Complete AI-assisted screening
       // --------------------------------------------------------
 
-      const analysisForm = new FormData();
-      analysisForm.append("resume_text", resumeText);
-      analysisForm.append("jd_text", jdText);
-
-      const analysis = await API.analyseResume(analysisForm);
-
-      UI.renderScoreCard(analysis);
-
-      // --------------------------------------------------------
-      // 3. Skill matching
-      // --------------------------------------------------------
-
-      const skills = await API.matchSkills({
-        resume_text: resumeText,
-        jd_text: jdText
-      });
-
-      UI.renderSkillsPanel(skills);
-
-      // Extract matched skills for the next API call
-      const matchedTechnicalSkills =
-        skills.matched_technical_skills || [];
-
-      const matchedSoftSkills =
-        skills.matched_soft_skills || [];
-
-      const matchedSkills = [
-        ...matchedTechnicalSkills.map(item => item.skill),
-        ...matchedSoftSkills
-      ];
-
-      // --------------------------------------------------------
-      // 4. Gap detection
-      // --------------------------------------------------------
-
-      const gaps = await API.detectGaps({
+      const screeningResult = await API.screenCandidate({
         resume_text: resumeText,
         jd_text: jdText,
-        matched_skills: matchedSkills
+        job_title: "Software Developer"
       });
 
-      UI.renderGapsPanel(gaps);
-
-      const criticalMissing =
-        gaps.critical_missing_skills || [];
-
-      const secondaryMissing =
-        gaps.secondary_missing_skills || [];
-
-      const missingSkills = [
-        ...criticalMissing,
-        ...secondaryMissing
-      ];
-
       // --------------------------------------------------------
-      // 5. Resume improvements
+      // 3. Render complete results
       // --------------------------------------------------------
 
-      const improvements = await API.getImprovements({
-        resume_text: resumeText,
-        job_title: "Software Developer",
-        critical_gaps: criticalMissing
+      UI.renderScoreCard(screeningResult);
+
+      UI.renderSkillsPanel({
+        matched_technical_skills:
+          screeningResult.matched_technical_skills || [],
+        matched_soft_skills:
+          screeningResult.matched_soft_skills || []
       });
 
-      UI.renderImprovementsPanel(improvements);
-
-      // --------------------------------------------------------
-      // 6. Interview preparation
-      // --------------------------------------------------------
-
-      const interview = await API.generateInterviewQuestions({
-        jd_text: jdText,
-        matched_skills: matchedSkills,
-        missing_skills: missingSkills
+      UI.renderGapsPanel({
+        critical_missing_skills:
+          screeningResult.critical_gaps || [],
+        secondary_missing_skills:
+          screeningResult.secondary_gaps || [],
+        experience_discrepancies:
+          screeningResult.experience_discrepancies || []
       });
 
-      UI.renderInterviewPanel(interview);
+      UI.renderImprovementsPanel(
+        screeningResult.resume_improvements || {}
+      );
+
+      UI.renderInterviewPanel(
+        screeningResult.interview_preparation || {}
+      );
 
       // --------------------------------------------------------
-      // 7. Show results
+      // 4. Show results
       // --------------------------------------------------------
 
       UI.showResults();

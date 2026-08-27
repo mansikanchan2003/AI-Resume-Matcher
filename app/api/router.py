@@ -5,6 +5,7 @@ from app.api.routes import gaps
 from app.api.routes import improvements
 from app.api.routes import interview
 from app.api.routes import matching
+from app.api.routes import screening
 
 router = APIRouter()
 
@@ -36,4 +37,10 @@ router.include_router(
     interview.router,
     prefix="/interview",
     tags=["Interview"],
+)
+
+router.include_router(
+    screening.router,
+    prefix="/screening",
+    tags=["Screening"],
 )

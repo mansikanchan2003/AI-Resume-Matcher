@@ -85,7 +85,17 @@ window.API = {
       },
       body: JSON.stringify(payload)
     });
-  }
+  },
+
+  screenCandidate(payload) {
+    return apiFetch("/screening/screen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+  },
 };
 
 console.log("API layer loaded successfully");

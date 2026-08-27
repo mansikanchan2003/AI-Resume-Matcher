@@ -1,8 +1,3 @@
-Absolutely. Since the project is now at a stable checkpoint, I'd replace the README with a clean, portfolio-focused version that accurately reflects **everything currently implemented**, including the AI Screening Worker, human escalation, testing, and Gemini configuration.
-
-Replace the entire contents of `README.md` with this:
-
-````markdown
 # 🤖 AI Resume & JD Matcher
 
 An AI-powered **Resume & Job Description Matching Platform** built with **FastAPI** and **Google Gemini**.

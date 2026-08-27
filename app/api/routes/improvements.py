@@ -14,6 +14,10 @@ from app.services.llm_service import LLMService
 
 router = APIRouter()
 
+# Create the LLM and analysis services once when the application starts.
+llm_service = LLMService()
+analysis_service = AnalysisService(llm=llm_service)
+
 
 @router.post(
     "/suggest",
@@ -23,9 +27,6 @@ async def suggest_improvements(
     payload: ImprovementRequest,
 ):
     """Generate targeted ATS and STAR resume improvements."""
-
-    llm_service = LLMService()
-    analysis_service = AnalysisService(llm_service)
 
     result = await analysis_service.run_improvements(
         resume_text=payload.resume_text,

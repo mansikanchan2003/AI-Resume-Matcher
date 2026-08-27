@@ -14,6 +14,10 @@ from app.services.llm_service import LLMService
 
 router = APIRouter()
 
+# Create the LLM and analysis services once when the application starts.
+llm_service = LLMService()
+analysis_service = AnalysisService(llm=llm_service)
+
 
 @router.post(
     "/generate",
@@ -23,9 +27,6 @@ async def generate_interview_questions(
     payload: InterviewRequest,
 ):
     """Generate targeted technical and behavioural interview questions."""
-
-    llm_service = LLMService()
-    analysis_service = AnalysisService(llm_service)
 
     result = await analysis_service.run_interview_prep(
         jd_text=payload.jd_text,

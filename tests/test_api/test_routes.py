@@ -2,6 +2,8 @@
 API route integration tests.
 """
 
+from typing import cast
+
 import pytest
 
 from app.models.responses import (
@@ -16,6 +18,7 @@ from app.models.responses import (
     TechnicalQuestion,
     BehaviouralQuestion,
 )
+from app.services.llm_service import LLMService
 
 
 @pytest.mark.asyncio
@@ -23,13 +26,20 @@ async def test_analyse_returns_200_with_valid_inputs(
     client,
     sample_resume_text,
     sample_jd_text,
+    mock_llm_service,
     monkeypatch,
 ):
     from app.api.routes import analysis
+    from app.services.analysis_service import AnalysisService
 
-    mock_service = analysis.AnalysisService(llm=None)
+    mock_service = AnalysisService(
+        llm=cast(LLMService, mock_llm_service)
+    )
 
-    async def fake_run_analysis(resume_text, jd_text):
+    async def fake_run_analysis(
+        resume_text,
+        jd_text,
+    ):
         return AnalysisResponse(
             match_score=85,
             seniority_alignment="Well-Matched",
@@ -68,7 +78,9 @@ async def test_analyse_returns_200_with_valid_inputs(
 
 
 @pytest.mark.asyncio
-async def test_analyse_returns_422_without_required_fields(client):
+async def test_analyse_returns_422_without_required_fields(
+    client,
+):
     response = await client.post(
         "/api/v1/analysis/analyse",
         data={},
@@ -97,11 +109,15 @@ async def test_match_skills_returns_200(
     client,
     sample_resume_text,
     sample_jd_text,
+    mock_llm_service,
     monkeypatch,
 ):
     from app.api.routes import matching
+    from app.services.analysis_service import AnalysisService
 
-    mock_service = matching.AnalysisService(llm=None)
+    mock_service = AnalysisService(
+        llm=cast(LLMService, mock_llm_service)
+    )
 
     async def fake_run_skill_matching(
         resume_text,
@@ -145,6 +161,7 @@ async def test_match_skills_returns_200(
     data = response.json()
 
     assert "matched_technical_skills" in data
+
     assert isinstance(
         data["matched_technical_skills"],
         list,
@@ -156,11 +173,15 @@ async def test_detect_gaps_deduplicates_matched_skills(
     client,
     sample_resume_text,
     sample_jd_text,
+    mock_llm_service,
     monkeypatch,
 ):
     from app.api.routes import gaps
+    from app.services.analysis_service import AnalysisService
 
-    mock_service = gaps.AnalysisService(llm=None)
+    mock_service = AnalysisService(
+        llm=cast(LLMService, mock_llm_service)
+    )
 
     async def fake_run_gap_detection(
         resume_text,
@@ -184,11 +205,10 @@ async def test_detect_gaps_deduplicates_matched_skills(
         fake_run_gap_detection,
     )
 
-    # Replace the constructor instead of patching the class method.
     monkeypatch.setattr(
         gaps,
-        "AnalysisService",
-        lambda llm: mock_service,
+        "analysis_service",
+        mock_service,
     )
 
     response = await client.post(
@@ -219,16 +239,20 @@ async def test_detect_gaps_deduplicates_matched_skills(
         for item in data["critical_missing_skills"]
     }
 
-    assert matched_skills.isdisjoint(missing_skills)
+    assert matched_skills.isdisjoint(
+        missing_skills
+    )
 
 
 @pytest.mark.asyncio
 async def test_improvements_returns_star_bullets(
     client,
     sample_resume_text,
+    mock_llm_service,
     monkeypatch,
 ):
     from app.api.routes import improvements
+    from app.services.analysis_service import AnalysisService
 
     async def fake_run_improvements(
         resume_text,
@@ -243,10 +267,12 @@ async def test_improvements_returns_star_bullets(
             star_bullet_recommendations=[
                 StarBulletRecommendation(
                     target_skill="FastAPI",
-                    current_resume_context="Built REST APIs.",
+                    current_resume_context=(
+                        "Built REST APIs."
+                    ),
                     suggested_star_bullet=(
-                        "Developed FastAPI REST APIs that improved "
-                        "backend service reliability."
+                        "Developed FastAPI REST APIs that "
+                        "improved backend service reliability."
                     ),
                     improvement_reason=(
                         "Adds measurable and role-relevant impact."
@@ -260,7 +286,9 @@ async def test_improvements_returns_star_bullets(
             ],
         )
 
-    mock_service = improvements.AnalysisService(llm=None)
+    mock_service = AnalysisService(
+        llm=cast(LLMService, mock_llm_service)
+    )
 
     monkeypatch.setattr(
         mock_service,
@@ -270,8 +298,8 @@ async def test_improvements_returns_star_bullets(
 
     monkeypatch.setattr(
         improvements,
-        "AnalysisService",
-        lambda llm: mock_service,
+        "analysis_service",
+        mock_service,
     )
 
     response = await client.post(
@@ -308,9 +336,11 @@ async def test_improvements_returns_star_bullets(
 async def test_interview_returns_correct_question_counts(
     client,
     sample_jd_text,
+    mock_llm_service,
     monkeypatch,
 ):
     from app.api.routes import interview
+    from app.services.analysis_service import AnalysisService
 
     async def fake_run_interview_prep(
         jd_text,
@@ -340,7 +370,9 @@ async def test_interview_returns_correct_question_counts(
             ],
         )
 
-    mock_service = interview.AnalysisService(llm=None)
+    mock_service = AnalysisService(
+        llm=cast(LLMService, mock_llm_service)
+    )
 
     monkeypatch.setattr(
         mock_service,
@@ -350,8 +382,8 @@ async def test_interview_returns_correct_question_counts(
 
     monkeypatch.setattr(
         interview,
-        "AnalysisService",
-        lambda llm: mock_service,
+        "analysis_service",
+        mock_service,
     )
 
     response = await client.post(

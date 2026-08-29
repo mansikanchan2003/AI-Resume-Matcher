@@ -47,7 +47,7 @@ class LLMService:
         Retries temporary Gemini availability errors.
         """
 
-        max_retries = 3
+        max_retries = 4
         response = None
 
         for attempt in range(max_retries):

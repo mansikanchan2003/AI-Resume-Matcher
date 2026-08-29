@@ -5,120 +5,895 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="AI-powered resume and job description matcher. Get instant match scores, skill gap analysis, and personalised interview prep." />
-  <title>AI Resume Matcher | Match Your Resume to Any Job</title>
-  <link rel="icon" href="/favicon.png" type="image/png">
+    content="TalentPulse AI — Enterprise AI-powered resume and job description cognitive matcher, skill gap auditor, and candidate evaluation platform." />
+  <title>TalentPulse AI | Enterprise Recruitment & Candidate Intelligence</title>
+  <link rel="icon" href="/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
+  <!-- SVG Gradient Definitions for Circular Gauges -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"
+    xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#06b6d4" />
+        <stop offset="50%" stop-color="#6366f1" />
+        <stop offset="100%" stop-color="#a855f7" />
+      </linearGradient>
+    </defs>
+  </svg>
 
-  <!-- ── HEADER ─────────────────────────────────────────────── -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="logo">
-        <span class="logo-icon">⚡</span>
-        <span class="logo-text">ResumeAI</span>
+  <div class="app-container">
+
+    <!-- ── SIDEBAR NAVIGATION ───────────────────────────────────── -->
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-top">
+
+        <!-- Brand Logo -->
+        <div class="brand-wrapper">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+          </div>
+          <div class="brand-meta">
+            <span class="brand-title">TalentPulse AI</span>
+            <span class="brand-subtitle">Enterprise Recruitment</span>
+          </div>
+        </div>
+
+        <!-- + New Analysis CTA -->
+        <button class="btn-new-analysis" id="btn-sidebar-new-analysis">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>New Analysis</span>
+        </button>
+
+        <!-- Primary Navigation -->
+        <nav class="sidebar-nav">
+          <a href="#analyze" class="nav-item active" data-view="analyze" id="nav-analyze">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="3" y1="9" x2="21" y2="9"></line>
+              <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+            <span>Analyze</span>
+          </a>
+
+          <a href="#screening" class="nav-item" data-view="screening" id="nav-screening">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span>Screening</span>
+          </a>
+
+          <a href="#evaluation" class="nav-item" data-view="evaluation" id="nav-evaluation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Candidate Eval</span>
+          </a>
+
+          <a href="#history" class="nav-item" data-view="history" id="nav-history">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 14 14"></polyline>
+            </svg>
+            <span>History</span>
+          </a>
+
+          <div class="sidebar-divider"></div>
+
+          <a href="#settings" class="nav-item" data-view="settings" id="nav-settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+              </path>
+            </svg>
+            <span>Settings</span>
+          </a>
+
+          <a href="#support" class="nav-item" data-view="support" id="nav-support">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <span>Support</span>
+          </a>
+        </nav>
       </div>
-      <nav class="header-nav">
-        <a href="#upload-section">Analyse</a>
-        <a href="#results-section">Results</a>
-      </nav>
-    </div>
-  </header>
 
-  <!-- ── HERO ───────────────────────────────────────────────── -->
-  <section class="hero">
-    <div class="container hero-inner">
-      <h1 class="hero-title">Match Your Resume to <span class="gradient-text">Any Job</span></h1>
-      <p class="hero-subtitle">
-        Get an AI-powered match score, skill gap analysis, STAR-format resume
-        improvements, and tailored interview questions — in seconds.
-      </p>
-    </div>
-  </section>
-
-  <!-- ── UPLOAD SECTION ─────────────────────────────────────── -->
-  <main id="upload-section" class="container upload-section">
-
-    <!-- Resume Upload -->
-    <div class="card upload-card" id="resume-upload-card">
-      <h2 class="card-title">📄 Upload Your Resume</h2>
-      <div class="dropzone" id="resume-dropzone" role="button" tabindex="0"
-        aria-label="Click or drag your resume here to upload">
-        <p class="dropzone-hint">Drag & drop or <span class="link-text">browse</span></p>
-        <p class="dropzone-formats">Supports PDF, DOCX, TXT</p>
-        <input type="file" id="resume-file-input" accept=".pdf,.docx,.txt" class="hidden-input" aria-hidden="true" />
+      <!-- Sidebar Footer -->
+      <div class="sidebar-bottom">
+        <div class="status-badge-inline">
+          <span class="status-dot"></span>
+          <span>AI Engine Operational</span>
+        </div>
+        <button class="nav-item" id="btn-logout" style="width: 100%; border: none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Logout</span>
+        </button>
       </div>
-      <p class="file-status" id="resume-file-status" aria-live="polite"></p>
-    </div>
+    </aside>
 
-    <!-- JD Input -->
-    <div class="card jd-card">
-      <h2 class="card-title">📋 Paste Job Description</h2>
-      <textarea id="jd-textarea" class="jd-textarea" placeholder="Paste the full job description here..." rows="12"
-        aria-label="Job description text area"></textarea>
-    </div>
+    <!-- ── MAIN VIEWPORT ────────────────────────────────────────── -->
+    <main class="app-main">
 
-    <!-- Analyse Button -->
-    <div class="action-row">
-      <button id="analyse-btn" class="btn btn-primary" aria-label="Run AI analysis">
-        <span id="btn-label">✨ Analyse Match</span>
-        <span id="btn-spinner" class="spinner hidden" aria-hidden="true"></span>
-      </button>
-      <p class="error-msg hidden" id="error-msg" role="alert"></p>
-    </div>
-  </main>
+      <!-- Top Sticky Navbar -->
+      <header class="top-navbar">
+        <div class="top-navbar-left">
+          <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <span class="current-view-title" id="current-view-title">Candidate Intelligence Workspace</span>
+        </div>
 
-  <!-- ── RESULTS SECTION ────────────────────────────────────── -->
-  <section id="results-section" class="container results-section hidden">
+        <div class="top-navbar-right">
+          <div class="top-search-wrapper">
+            <svg class="top-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" placeholder="Search candidates, roles..." id="global-search-input" />
+          </div>
 
-    <!-- Score Card -->
-    <div class="card score-card" id="score-card">
-      <div class="score-ring-wrapper">
-        <svg class="score-ring" viewBox="0 0 120 120" aria-hidden="true">
-          <circle class="score-ring-bg" cx="60" cy="60" r="50" />
-          <circle class="score-ring-fill" id="score-ring-fill" cx="60" cy="60" r="50" />
-        </svg>
-        <div class="score-number" id="score-number">--</div>
-      </div>
-      <div class="score-meta">
-        <h2 class="score-label">Match Score</h2>
-        <span class="seniority-badge" id="seniority-badge">--</span>
-        <p class="executive-summary" id="executive-summary"></p>
-      </div>
-    </div>
+          <button class="nav-icon-btn" id="btn-notifications" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="badge-counter"></span>
+          </button>
 
-    <!-- Tabs -->
-    <div class="tabs" role="tablist">
-      <button class="tab-btn active" role="tab" data-tab="skills" aria-selected="true" id="tab-skills">Skills</button>
-      <button class="tab-btn" role="tab" data-tab="gaps" aria-selected="false" id="tab-gaps">Gaps</button>
-      <button class="tab-btn" role="tab" data-tab="improvements" aria-selected="false"
-        id="tab-improvements">Improvements</button>
-      <button class="tab-btn" role="tab" data-tab="interview" aria-selected="false" id="tab-interview">Interview
-        Prep</button>
-    </div>
+          <button class="user-avatar-btn" id="btn-user-profile" title="Recruiter Profile">
+            HR
+          </button>
+        </div>
+      </header>
 
-    <!-- Tab Panels -->
-    <div id="panel-skills" class="tab-panel card" role="tabpanel" aria-labelledby="tab-skills"></div>
-    <div id="panel-gaps" class="tab-panel card hidden" role="tabpanel" aria-labelledby="tab-gaps"></div>
-    <div id="panel-improvements" class="tab-panel card hidden" role="tabpanel" aria-labelledby="tab-improvements"></div>
-    <div id="panel-interview" class="tab-panel card hidden" role="tabpanel" aria-labelledby="tab-interview"></div>
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- VIEW 1: ANALYZE WORKSPACE                                  -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <section class="view-content" id="view-analyze">
 
-  </section>
+        <div class="workspace-header">
+          <h1>Candidate Intelligence <span class="highlight-text">Workspace</span></h1>
+          <p class="workspace-subtitle">
+            Upload a candidate's resume and define the target job description to initiate our cognitive evaluation
+            engine. The AI will cross-reference skills, experience trajectory, and gap probabilities in real-time.
+          </p>
+        </div>
 
-  <!-- ── FOOTER ─────────────────────────────────────────────── -->
-  <footer class="site-footer">
-    <div class="container">
-      <p>Built with FastAPI · Python · Gemini AI &nbsp;·&nbsp; Portfolio Project</p>
-    </div>
-  </footer>
+        <!-- 2-Column Upload / JD Grid -->
+        <div class="workspace-grid">
 
+          <!-- Left: Resume Upload Card -->
+          <div class="card-panel">
+            <div class="panel-title-bar">
+              <span class="panel-title-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                Candidate Resume Dossier
+              </span>
+              <span class="file-meta-tag" id="file-size-tag">PDF, DOCX, TXT</span>
+            </div>
+
+            <div class="resume-dropzone" id="resume-dropzone" role="button" tabindex="0" aria-label="Drop resume here">
+              <div class="dropzone-icon-circle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+              </div>
+              <h3 class="dropzone-title">Drag & Drop Resume</h3>
+              <p class="dropzone-subtext">PDF, DOCX, or TXT up to 10MB</p>
+              <button type="button" class="btn-select-file" id="btn-select-file">Select File Manually</button>
+              <input type="file" id="resume-file-input" accept=".pdf,.docx,.txt" class="hidden" />
+            </div>
+
+            <!-- Selected File State -->
+            <div class="file-selected-chip hidden" id="file-selected-chip">
+              <div class="file-selected-info">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                  <polyline points="13 2 13 9 20 9"></polyline>
+                </svg>
+                <div>
+                  <div class="file-name" id="file-name-display">resume.pdf</div>
+                  <div class="file-meta-tag" id="file-status-text">Ready for analysis</div>
+                </div>
+              </div>
+              <button type="button" class="btn-remove-file" id="btn-remove-file" title="Remove file">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Target Role & Candidate Info -->
+            <div class="target-role-group">
+              <label class="target-role-label" for="target-role-input">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="6"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+                Target Role
+              </label>
+              <input type="text" class="target-role-input" id="target-role-input"
+                placeholder="e.g. Senior Frontend Engineer" value="Senior Backend Engineer" />
+            </div>
+          </div>
+
+          <!-- Right: Job Description Context Card -->
+          <div class="card-panel">
+            <div class="panel-title-bar">
+              <span class="panel-title-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                </svg>
+                Job Description Context
+              </span>
+              <button type="button" class="file-meta-tag" id="btn-clear-jd"
+                style="cursor: pointer; background: none; border: none;">Clear</button>
+            </div>
+
+            <textarea class="jd-textarea" id="jd-textarea"
+              placeholder="Paste the full job description here... Our AI will automatically extract key responsibilities, required technical skills, and soft-skill indicators to build a comparative baseline."></textarea>
+          </div>
+
+        </div>
+
+        <!-- Benchmark Profiles Quick Pick -->
+        <div class="benchmark-section">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <span class="benchmark-label" style="margin-bottom: 0;">Try Quick-Start Benchmark Profiles</span>
+            <span class="badge-source-tag badge-source-demo">Demo Dossiers • Triggers Real AI Analysis</span>
+          </div>
+          <div class="benchmark-cards-row">
+            <button class="benchmark-card" id="btn-load-backend-sample">
+              <div class="benchmark-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <div class="benchmark-info">
+                <span class="benchmark-card-badge">Quick Start Sample</span>
+                <h4>Software Engineer</h4>
+                <p>Cloud Platform & Backend (AWS/FastAPI)</p>
+              </div>
+            </button>
+
+            <button class="benchmark-card" id="btn-load-frontend-sample">
+              <div class="benchmark-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+              </div>
+              <div class="benchmark-info">
+                <span class="benchmark-card-badge">Quick Start Sample</span>
+                <h4>Frontend Architect</h4>
+                <p>React, TypeScript & WebGL Ecosystem</p>
+              </div>
+            </button>
+
+            <button class="benchmark-card" id="btn-load-marketing-sample">
+              <div class="benchmark-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+              </div>
+              <div class="benchmark-info">
+                <span class="benchmark-card-badge">Quick Start Sample</span>
+                <h4>Marketing Manager</h4>
+                <p>B2B SaaS Growth & Performance</p>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Action CTA Row -->
+        <div class="action-cta-bar">
+          <button type="button" class="btn-start-analysis" id="analyse-btn">
+            <span id="btn-label">Start Cognitive Analysis</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Error & Info Alerts -->
+        <div class="alert-banner error hidden" id="error-msg" role="alert"></div>
+
+        <!-- Loading Progress Stepper Card -->
+        <div class="analysis-loading-card hidden" id="analysis-loading-card">
+          <div class="loading-spinner-ring"></div>
+          <h3 class="loading-title">Conducting Deep Cognitive Evaluation</h3>
+          <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto;">
+            Our Gemini AI model is synthesizing semantic competencies, evaluating resume claims against JD requirements,
+            and generating recruiter STAR recommendations.
+          </p>
+          <div class="loading-steps">
+            <div class="loading-step-item active" id="step-1">
+              <span>1. Parsing Dossier</span>
+            </div>
+            <div class="loading-step-item" id="step-2">
+              <span>2. Cross-referencing Skills</span>
+            </div>
+            <div class="loading-step-item" id="step-3">
+              <span>3. Synthesizing Insights</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- VIEW 2: SCREENING RESULTS                                  -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <section class="view-content hidden" id="view-screening">
+
+        <!-- Candidate Profile Header -->
+        <div class="candidate-header-bar">
+          <div class="candidate-profile-meta">
+            <div class="candidate-badge-row">
+              <span class="badge-tag-id" id="screening-candidate-id">ID: CAN-8924</span>
+              <span class="badge-tag-status">
+                <span class="status-dot"></span>
+                Active Review
+              </span>
+              <span class="badge-source-tag badge-source-real" id="screening-source-badge">REAL AI ANALYSIS</span>
+            </div>
+            <h2 class="candidate-name-display" id="screening-candidate-name">Candidate Evaluation</h2>
+            <div class="candidate-role-display" id="screening-target-role">Senior Backend Engineer</div>
+          </div>
+
+          <div class="candidate-header-actions">
+            <button class="btn-header-action secondary" id="btn-export-pdf">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Export Report
+            </button>
+            <button class="btn-header-action secondary" id="btn-view-eval-detail">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              Recruiter Evaluation
+            </button>
+            <button class="btn-header-action primary" id="btn-schedule-interview">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              Schedule Interview
+            </button>
+          </div>
+        </div>
+
+        <!-- 2-Column Screening Layout -->
+        <div class="screening-grid">
+
+          <!-- Left Column: Overall Match & Level Alignment -->
+          <div class="score-column">
+
+            <!-- Overall Match Gauge Card -->
+            <div class="score-gauge-card">
+              <span class="gauge-header-label">Overall Match</span>
+              <div class="gauge-circle-container">
+                <svg class="gauge-svg" viewBox="0 0 160 160">
+                  <circle class="gauge-bg-ring" cx="80" cy="80" r="70" />
+                  <circle class="gauge-fill-ring" id="score-ring-fill" cx="80" cy="80" r="70" />
+                </svg>
+                <div class="gauge-center-content">
+                  <div class="gauge-number" id="score-number">85<span class="gauge-percent-sign">%</span></div>
+                </div>
+              </div>
+              <span class="match-tier-badge exceptional" id="match-tier-badge">
+                <span class="status-dot"></span>
+                Strong Fit
+              </span>
+            </div>
+
+            <!-- Level Alignment Card -->
+            <div class="level-alignment-card">
+              <span class="gauge-header-label">Level Alignment</span>
+              <div class="level-title-display" id="seniority-alignment-display">Senior L4</div>
+              <div class="level-track-bar">
+                <div class="level-fill-segment" id="level-fill-segment" style="width: 80%;"></div>
+              </div>
+              <div class="level-scale-labels">
+                <span>L1</span>
+                <span>L2</span>
+                <span>L3</span>
+                <span class="active" id="label-l4">L4</span>
+                <span>L5</span>
+              </div>
+            </div>
+
+            <!-- Human Escalation Notice if needed -->
+            <div class="card-panel hidden" id="escalation-notice-card"
+              style="border-left: 3px solid var(--color-accent-amber);">
+              <span class="subcard-title-tag concerns">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                  </path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                Human Escalation Required
+              </span>
+              <p id="escalation-reason-text" style="font-size: 0.85rem; color: var(--text-secondary);"></p>
+            </div>
+
+          </div>
+
+          <!-- Right Column: AI Executive Insight, Technical Competencies & Deep Dives -->
+          <div class="details-column">
+
+            <!-- AI Executive Insight -->
+            <div class="executive-insight-card">
+              <div class="insight-header-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                  </polygon>
+                </svg>
+                AI Executive Insight
+              </div>
+              <p class="insight-body-text" id="executive-summary">
+                Candidate demonstrates solid architectural knowledge with strong alignment in target technologies and
+                systems design.
+              </p>
+            </div>
+
+            <!-- Technical Competency Progress Bars -->
+            <div class="competency-card">
+              <div class="panel-title-bar">
+                <span class="panel-title-label">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="4 17 10 11 4 5"></polyline>
+                    <line x1="12" y1="19" x2="20" y2="19"></line>
+                  </svg>
+                  Technical Competency Alignment
+                </span>
+                <span class="file-meta-tag" id="matched-skills-count-tag">Matched Skills</span>
+              </div>
+              <div class="competency-list" id="competency-list-container">
+                <!-- Populated dynamically via UI.renderSkillsPanel -->
+              </div>
+            </div>
+
+            <!-- Core Strengths vs Areas to Probe Split -->
+            <div class="strengths-concerns-grid">
+
+              <div class="insight-subcard">
+                <span class="subcard-title-tag strengths">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                  </svg>
+                  Core Strengths
+                </span>
+                <ul class="bullet-insights-list strengths" id="strengths-list-container">
+                  <!-- Populated dynamically -->
+                </ul>
+              </div>
+
+              <div class="insight-subcard">
+                <span class="subcard-title-tag concerns">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                  </svg>
+                  Areas to Probe / Gaps
+                </span>
+                <ul class="bullet-insights-list concerns" id="concerns-list-container">
+                  <!-- Populated dynamically -->
+                </ul>
+              </div>
+
+            </div>
+
+            <!-- Suggested Interview Focus Card -->
+            <div class="interview-focus-card">
+              <div class="panel-title-bar">
+                <span class="panel-title-label">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  Suggested Interview Focus
+                </span>
+              </div>
+              <div class="interview-questions-list" id="interview-focus-list">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Extended Tabs for Deep Exploration -->
+            <div class="results-tabs-wrapper">
+              <div class="results-tabs-nav" role="tablist">
+                <button class="res-tab-btn active" data-res-tab="star-improvements">STAR Improvements</button>
+                <button class="res-tab-btn" data-res-tab="detailed-gaps">Skill & Experience Gaps</button>
+                <button class="res-tab-btn" data-res-tab="all-interview-questions">Full Interview Question Bank</button>
+              </div>
+
+              <!-- Tab Panel: STAR Improvements -->
+              <div class="res-tab-panel" id="panel-star-improvements">
+                <!-- Populated via UI.renderImprovementsPanel -->
+              </div>
+
+              <!-- Tab Panel: Detailed Gaps -->
+              <div class="res-tab-panel hidden" id="panel-detailed-gaps">
+                <!-- Populated via UI.renderGapsPanel -->
+              </div>
+
+              <!-- Tab Panel: All Interview Questions -->
+              <div class="res-tab-panel hidden" id="panel-all-interview-questions">
+                <!-- Populated via UI.renderInterviewPanel -->
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- VIEW 3: CANDIDATE EVALUATION                               -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <section class="view-content hidden" id="view-evaluation">
+
+        <!-- Candidate Profile Card -->
+        <div class="eval-top-card">
+          <div class="eval-profile-left">
+            <div class="eval-avatar-lg" id="eval-avatar-initials">SJ</div>
+            <div>
+              <h2 class="eval-name-h2" id="eval-candidate-name">Candidate Evaluation Dossier</h2>
+              <div class="eval-meta-row">
+                <span class="eval-meta-item" id="eval-role-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                  <span id="eval-role-text">Staff Cloud Architect</span>
+                </span>
+                <span class="eval-meta-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Verified Remote / Global
+                </span>
+                <span class="eval-meta-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                  candidate@assessment.ai
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="candidate-header-actions">
+            <button class="btn-header-action secondary" id="btn-eval-back-to-screening">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              Back to Screening
+            </button>
+            <button class="btn-header-action primary" id="btn-eval-move-interview">
+              Move to Interview
+            </button>
+          </div>
+        </div>
+
+        <!-- Evaluation Grid Layout -->
+        <div class="eval-grid-layout">
+
+          <!-- Left: Deep Core Competencies Analysis -->
+          <div class="card-panel">
+            <div class="panel-title-bar">
+              <span class="panel-title-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polygon points="12 6 15 11 20 12 16 16 17 21 12 18 7 21 8 16 4 12 9 11 12 6"></polygon>
+                </svg>
+                Core Competencies Deep Dive
+              </span>
+              <span class="file-meta-tag">AI Assessed</span>
+            </div>
+
+            <div class="competency-list" id="eval-competencies-container">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Right: Verification Pipeline & Risk Analysis -->
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+
+            <!-- Verification Pipeline -->
+            <div class="verification-pipeline-card">
+              <span class="panel-title-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                Verification Checklist
+              </span>
+              <div class="verification-list" id="eval-verification-list">
+                <!-- Dynamically populated from information_requiring_verification -->
+              </div>
+            </div>
+
+            <!-- Risk & Flight Risk Analysis -->
+            <div class="risk-card">
+              <div class="risk-header-row">
+                <span class="panel-title-label">Risk Assessment</span>
+                <span class="risk-level-badge" id="risk-level-badge">LOW RISK</span>
+              </div>
+              <ul class="bullet-insights-list" id="eval-risk-bullets" style="font-size: 0.82rem;">
+                <!-- Dynamically populated -->
+              </ul>
+              <div class="tenure-curve-box">
+                <svg class="tenure-curve-svg" viewBox="0 0 200 60" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="tenure-grad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.5" />
+                      <stop offset="100%" stop-color="#6366f1" stop-opacity="0.0" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,50 Q60,40 100,20 T200,10 L200,60 L0,60 Z" fill="url(#tenure-grad)" />
+                  <path d="M0,50 Q60,40 100,20 T200,10" fill="none" stroke="#818cf8" stroke-width="2" />
+                </svg>
+                <div class="tenure-curve-label">Predicted Role Stability: <strong>High (3+ Years)</strong></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Sticky Recruiter Decision Bar -->
+        <div class="eval-decision-bar">
+          <button class="btn-decision reject" id="btn-decision-reject">Reject Candidate</button>
+          <button class="btn-decision hold" id="btn-decision-hold">Place on Hold</button>
+          <button class="btn-decision advance" id="btn-decision-advance">Advance to Interview Stage</button>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- VIEW 4: ANALYSIS HISTORY (Analysis Repository)             -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <section class="view-content hidden" id="view-history">
+
+        <div class="repository-header">
+          <div class="repository-title-wrap">
+            <h1>Analysis Repository</h1>
+            <p>Review, filter, and manage historical candidate assessments and AI match records.</p>
+          </div>
+          <button class="btn-header-action secondary" id="btn-export-history-report">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Export All Records
+          </button>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="repository-filters-bar">
+          <div class="repo-search-input-wrap">
+            <svg class="repo-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" placeholder="Search candidates, roles, or skills..." id="history-search-input" />
+          </div>
+
+          <div class="filter-pills-group">
+            <button class="filter-pill active" data-filter="all">All Assessments</button>
+            <button class="filter-pill" data-filter="real">Real Scans</button>
+            <button class="filter-pill" data-filter="demo">Demo Samples</button>
+            <button class="filter-pill" data-filter="high-match">High Match (80%+)</button>
+          </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="history-table-container">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Candidate</th>
+                <th>Role Context</th>
+                <th>Match Score</th>
+                <th>Analysis Tier</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="history-table-body">
+              <!-- Dynamically populated via UI.renderHistoryTable -->
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- VIEW 5: SETTINGS                                           -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <section class="view-content hidden" id="view-settings">
+        <div class="workspace-header">
+          <h1>Platform <span class="highlight-text">Settings</span></h1>
+          <p class="workspace-subtitle">Configure AI model parameters, screening threshold sensitivities, and enterprise
+            ATS export schemas.</p>
+        </div>
+
+        <div class="settings-grid">
+          <div class="card-panel">
+            <div class="panel-title-bar">
+              <span class="panel-title-label">AI Engine & Model Configuration</span>
+            </div>
+            <div class="setting-row">
+              <div class="setting-label-block">
+                <h4>Primary Intelligence Model</h4>
+                <p>Google Gemini multimodal reasoning engine</p>
+              </div>
+              <div class="setting-control">
+                <select id="setting-ai-model">
+                  <option value="gemini-2.5-flash" selected>Gemini 2.5 Flash (Fast, Recommended)</option>
+                  <option value="gemini-2.5-pro">Gemini 2.5 Pro (Deep Reasoning)</option>
+                </select>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div class="setting-label-block">
+                <h4>Minimum Match Threshold</h4>
+                <p>Threshold to mark candidate as 'Strong Fit'</p>
+              </div>
+              <div class="setting-control">
+                <select id="setting-threshold">
+                  <option value="75">75% (Standard)</option>
+                  <option value="85" selected>85% (Strict)</option>
+                  <option value="90">90% (Elite)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <div class="panel-title-bar">
+              <span class="panel-title-label">ATS Export Preferences</span>
+            </div>
+            <div class="setting-row">
+              <div class="setting-label-block">
+                <h4>Report Format</h4>
+                <p>Default format when downloading assessment dossiers</p>
+              </div>
+              <div class="setting-control">
+                <select id="setting-export-format">
+                  <option value="pdf" selected>Structured PDF Report</option>
+                  <option value="json">JSON Metadata</option>
+                </select>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div class="setting-label-block">
+                <h4>Auto-Generate STAR Bullets</h4>
+                <p>Include actionable resume improvements on all scans</p>
+              </div>
+              <div class="setting-control">
+                <input type="checkbox" checked id="setting-auto-star" style="width: 18px; height: 18px;" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- VIEW 6: SUPPORT & KNOWLEDGE BASE                           -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <section class="view-content hidden" id="view-support">
+        <div class="workspace-header">
+          <h1>Recruiter <span class="highlight-text">Support & Guide</span></h1>
+          <p class="workspace-subtitle">Learn how our AI evaluates resumes, interprets match scores, and structures STAR
+            recommendations.</p>
+        </div>
+
+        <div class="settings-grid">
+          <div class="card-panel">
+            <div class="panel-title-bar">
+              <span class="panel-title-label">Match Score Rubric</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 14px; font-size: 0.9rem;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="match-tier-badge exceptional">90 - 100%</span>
+                <span style="color: var(--text-primary);"><strong>Exceptional Fit:</strong> Candidate exceeds all core
+                  requirements with verifiable evidence.</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="match-tier-badge">75 - 89%</span>
+                <span style="color: var(--text-primary);"><strong>Strong Fit:</strong> Matches core qualifications;
+                  minor non-critical gaps easily trainable.</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="match-tier-badge moderate">50 - 74%</span>
+                <span style="color: var(--text-primary);"><strong>Moderate Fit:</strong> Partial skill overlap; requires
+                  human escalation and skill probe.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <div class="panel-title-bar">
+              <span class="panel-title-label">STAR Methodology Guidance</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+              The AI generates targeted <strong>STAR (Situation, Task, Action, Result)</strong> bullet points to bridge
+              critical skill gaps without fabricating unearned experience. Recruiter questions focus on verifying
+              claimed strengths or probing detected gaps.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Third-party document parsers for PDF and DOCX client extraction -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
 
+  <!-- Core App Scripts -->
   <script src="js/api.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/main.js"></script>

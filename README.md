@@ -1,4 +1,3 @@
-````markdown
 # 🤖 TalentPulse AI — Resume & JD Matcher
 
 An AI-powered **Resume & Job Description Matching Platform** built with **FastAPI** and **Google Gemini**.
@@ -878,5 +877,4 @@ The project demonstrates the integration of:
 
 **FastAPI, Google Gemini, Pydantic validation, modular services, workflow orchestration, frontend API integration, automated testing, and human-in-the-loop AI design.**
 
-```
-```
+

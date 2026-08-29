@@ -1,173 +1,13 @@
-# 🤖 TalentPulse AI — AI Resume & JD Matcher
-
-An AI-powered **Resume & Job Description Matching Platform** built with **FastAPI** and **Google Gemini**.
-
-TalentPulse AI analyzes a candidate's resume against a target job description to evaluate role fit, identify matched skills and skill gaps, generate targeted resume improvements, prepare interview questions, and perform an AI-assisted first-pass candidate screening workflow for recruiter review.
-
----
-
-## 🌐 Live Demo
-
-**Live Application:**  
-https://ai-resume-matcher-fq06.onrender.com
-
-The application is deployed as a FastAPI service and exposes both the frontend and API through the deployed application.
-
-> **Note:** AI-powered features require a valid Gemini API configuration.
-
----
-
-## ✨ Features
-
-### 📊 Resume vs. Job Description Analysis
-
-Evaluates how well a candidate's resume aligns with a target job description.
-
-- Match score from **0–100**
-- Seniority alignment
-- Executive summary
-- Top candidate strengths
-- Major concerns
-
-### 🎯 Skill Matching
-
-Identifies skills shared between the candidate's resume and the job description.
-
-- Matched technical skills
-- Resume evidence for matched technical skills
-- Corresponding job-description requirements
-- Matched soft skills
-
-### 🔎 Skill & Experience Gap Detection
-
-Identifies requirements that are missing, weakly supported, or potentially inconsistent.
-
-- Critical missing skills
-- Secondary missing skills
-- Experience discrepancies
-- Relevant job-description clauses
-
-### ✍️ AI Resume Improvements
-
-Generates targeted recommendations to improve resume relevance for a specific role.
-
-- Tailored summary statement
-- STAR-based bullet recommendations
-- Suggested resume improvements
-- High-value keywords
-- Role-specific recommendations
-
-### 💼 AI Interview Preparation
-
-Generates interview preparation material based on the target role.
-
-- Technical interview questions
-- Behavioural interview questions
-- Focus areas
-- Relevant competencies
-- Evaluation criteria
-
-### 🧠 AI-Assisted Candidate Screening
-
-The project includes a bounded screening workflow that orchestrates the existing resume/JD analysis capabilities into a structured first-pass screening evaluation.
-
-The screening worker:
-
-- Validates candidate and job inputs
-- Performs resume/JD analysis
-- Matches technical and soft skills
-- Detects critical and secondary gaps
-- Identifies experience discrepancies
-- Generates resume improvement recommendations
-- Generates interview preparation questions
-- Identifies screening risks
-- Identifies information requiring human verification
-- Determines whether human review is required
-- Produces a structured screening result
-
-The worker **supports recruiter decision-making rather than replacing it**.
-
-It does not make a final hiring, rejection, or compensation decision.
-
----
-
-# 🖥️ Application Screenshots
-
-## 1. Candidate Intelligence Workspace
-
-The main TalentPulse AI workspace allows recruiters to upload a candidate's resume, provide a job description, select the target role, and initiate AI-powered candidate analysis.
-
-![TalentPulse AI Candidate Intelligence Workspace](docs/images/analyze-page.png)
-
----
-
-## 2. Candidate Intelligence Dashboard
-
-The candidate dashboard presents the overall match score, AI executive insight, technical competency, core strengths, areas to probe, and suggested interview focus.
-
-![TalentPulse AI Candidate Dashboard](docs/images/candidate-dashboard.png)
-
----
-
-## 3. Candidate Evaluation
-
-The Candidate Evaluation screen provides a structured assessment of the candidate, including core competencies, match percentages, verification requirements, and risk analysis.
-
-![TalentPulse AI Candidate Evaluation](docs/images/candidate-evaluation.png)
-
----
-
-## 4. Analysis Repository
-
-The Analysis Repository allows recruiters to review and manage previous AI-driven candidate assessments, including candidate names, role context, match scores, analysis tiers, and assessment dates.
-
-![TalentPulse AI Analysis Repository](docs/images/analysis-history.png)
-
----
-
-# 🔄 AI Screening Workflow
-
-The screening workflow is designed as a bounded, human-in-the-loop process:
-
-```text
-Candidate Resume / Profile
-            │
-            ▼
-     AI Screening Worker
-            │
-            ├───────────────┐
-            │               │
-            ▼               ▼
-    Resume/JD Analysis   Skill Matching
-            │               │
-            └───────┬───────┘
-                    │
-                    ▼
-             Gap Detection
-                    │
-                    ▼
-            Resume Improvements
-                    │
-                    ▼
-           Interview Preparation
-                    │
-                    ▼
-          Structured Evaluation
-                    │
-                    ▼
-        Risk & Verification
-             Assessment
-                    │
-                    ▼
-          Human Recruiter Review
+git add README.md
+git commit -m "docs: update README structure and screenshots"
+git push origin main
 
 The screening worker is intentionally designed to stop or escalate when the available information is insufficient for a reliable automated evaluation.
 
-## 🏗️ Architecture
+🏗️ Architecture
 
 The application follows a modular service-oriented architecture.
 
-```text
                          Frontend
                             │
                             ▼
@@ -177,34 +17,35 @@ The application follows a modular service-oriented architecture.
               │             │             │
               ▼             ▼             ▼
         Feature Routes  Screening Route  Health
-              │             │
-              │             ▼
-              │       Screening Worker
-              │             │
-              │      ┌──────┼──────┐
-              │      │      │      │
-              │      ▼      ▼      ▼
-              │   Analysis Matching Gaps
-              │      │      │      │
-              │      └──────┼──────┘
-              │             │
-              │      ┌──────┴──────┐
-              │      ▼             ▼
-              │ Improvements  Interview Prep
-              │      │             │
-              └──────┴──────┬──────┘
-                             │
-                             ▼
+                            │
+                            ▼
+                     Screening Worker
+                            │
+                  ┌─────────┼─────────┐
+                  │         │         │
+                  ▼         ▼         ▼
+              Analysis   Matching    Gaps
+                  │         │         │
+                  └─────────┼─────────┘
+                            │
+                  ┌─────────┴─────────┐
+                  ▼                   ▼
+           Improvements       Interview Prep
+                  │                   │
+                  └─────────┬─────────┘
+                            │
+                            ▼
                        LLM Service
-                             │
-                             ▼
-                      Google Gemini
-                             │
-                             ▼
-                   Pydantic Validation
-                             │
-                             ▼
+                            │
+                            ▼
+                     Google Gemini
+                            │
+                            ▼
+                  Pydantic Validation
+                            │
+                            ▼
                   Structured AI Output
+
 Separation of Responsibilities
 Routes handle HTTP requests and responses.
 Workers orchestrate bounded application workflows.
@@ -240,7 +81,9 @@ Development Tools
 Git
 GitHub
 Antigravity IDE
+
 📁 Project Structure
+
 AI-Resume-Matcher/
 │
 ├── app/
@@ -324,19 +167,23 @@ AI-Resume-Matcher/
 ├── pyrefly.toml
 ├── requirements.txt
 └── README.md
+
 🔌 API Endpoints
 
 All API endpoints are versioned under:
 
 /api/v1/
-Feature	Method	Endpoint	Input
-Resume Analysis	POST	/api/v1/analysis/analyse	Form Data
-Skill Matching	POST	/api/v1/matching/match-skills	JSON
-Gap Detection	POST	/api/v1/gaps/detect-gaps	JSON
-Resume Improvements	POST	/api/v1/improvements/suggest	JSON
-Interview Preparation	POST	/api/v1/interview/generate	JSON
-AI Candidate Screening	POST	/api/v1/screening/screen	JSON
-Health Check	GET	/health	—
+
+| Feature                | Method | Endpoint                        | Input     |
+| ---------------------- | ------ | ------------------------------- | --------- |
+| Resume Analysis        | POST   | `/api/v1/analysis/analyse`      | Form Data |
+| Skill Matching         | POST   | `/api/v1/matching/match-skills` | JSON      |
+| Gap Detection          | POST   | `/api/v1/gaps/detect-gaps`      | JSON      |
+| Resume Improvements    | POST   | `/api/v1/improvements/suggest`  | JSON      |
+| Interview Preparation  | POST   | `/api/v1/interview/generate`    | JSON      |
+| AI Candidate Screening | POST   | `/api/v1/screening/screen`      | JSON      |
+| Health Check           | GET    | `/health`                       | —         |
+
 📖 API Documentation
 
 When the application is running, FastAPI provides interactive API documentation.
@@ -662,9 +509,11 @@ Mansi Kanchan
 
 B.Tech — Computer Science & Engineering
 
-GitHub: github.com/mansikanchan2003
+GitHub:
+https://github.com/mansikanchan2003
 
-LinkedIn: linkedin.com/in/mansi-kanchan-7924b0196
+LinkedIn:
+https://www.linkedin.com/in/mansi-kanchan-7924b0196
 
 ⭐ Project Goal
 

@@ -92,77 +92,31 @@ It does not make a final hiring, rejection, or compensation decision.
 
 ---
 
-# 🖥️ Application Screenshots
+## 🖥️ Application Screenshots
 
-## 🏠 Candidate Intelligence Workspace
+### 🔍 Analyze Workspace
 
-The main TalentPulse AI workspace allows recruiters to upload a candidate's resume, enter the target job description, specify the target role, and initiate AI-powered candidate analysis.
+The TalentPulse AI workspace allows recruiters to upload a candidate's resume, provide a target job description, select a target role, and initiate an AI-powered candidate analysis.
 
-![Candidate Intelligence Workspace](docs/images/home-page.png)
+![TalentPulse AI Analyze Workspace](docs/images/1-Analyze_workplace.png)
 
----
+### 🧠 Screening Results
 
-## 📄 Resume Upload
+The AI screening workflow provides a structured overview of the candidate's suitability for the target role, including match score, strengths, concerns, and screening insights.
 
-Recruiters can upload a candidate resume in supported formats for AI-powered analysis.
+![TalentPulse AI Screening Results](docs/images/2-Screening_results.png)
 
-![Resume Upload](docs/images/resume-upload.png)
+### 👤 Candidate Evaluation
 
----
+The Candidate Evaluation workspace presents detailed candidate intelligence, including the candidate's name, role, contact information, core competencies, verification pipeline, and risk analysis.
 
-## 💼 Job Description Context
+![TalentPulse AI Candidate Evaluation](docs/images/3-Candidate_Evaluation.png)
 
-The target job description provides the context used by the AI evaluation engine to determine role requirements and candidate alignment.
+### 📚 Analysis Repository
 
-![Job Description](docs/images/job-description.png)
+The Analysis Repository allows recruiters to review previous AI-driven candidate assessments, search candidates, and compare match scores and analysis tiers.
 
----
-
-## 📊 Match Score
-
-The platform generates an overall match score representing the candidate's alignment with the target role.
-
-![Match Score](docs/images/match-score.png)
-
----
-
-## 👤 Candidate Assessment
-
-The Candidate Assessment view provides a structured evaluation of the candidate, including candidate identity, role context, core competencies, verification information, and risk analysis.
-
-![Candidate Assessment](docs/images/candidate-assessment.png)
-
----
-
-## 🎯 Matched Skills
-
-The system identifies technical and soft skills supported by both the candidate's resume and the job description.
-
-![Matched Skills](docs/images/matched-skills.png)
-
----
-
-## 🔎 Skill Gaps
-
-Missing or weakly supported requirements are highlighted to help recruiters identify areas requiring further review.
-
-![Skill Gaps](docs/images/skill-gaps.png)
-
----
-
-## ✍️ Resume Improvement Suggestions
-
-The AI generates targeted recommendations for improving the candidate's resume for the selected role.
-
-![Resume Improvement Suggestions](docs/images/improvement-suggestions.png)
-
----
-
-## 💬 Interview Preparation
-
-The platform generates role-specific interview preparation material, including technical and behavioural questions.
-
-![Interview Preparation](docs/images/interview-preparation.png)
+![TalentPulse AI Analysis Repository](docs/images/4-Analyze_History.png)
 
 ---
 

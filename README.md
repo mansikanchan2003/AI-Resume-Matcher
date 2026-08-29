@@ -122,6 +122,7 @@ The Analysis Repository allows recruiters to review previous AI-driven candidate
 
 ![TalentPulse AI Analysis Repository](docs/images/4-Analyze_History.png)
 
+
 Candidate Resume / Profile
             │
             ▼

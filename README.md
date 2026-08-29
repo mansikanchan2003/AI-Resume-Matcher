@@ -163,46 +163,47 @@ Candidate Resume / Profile
 
 The screening worker is intentionally designed to stop or escalate when the available information is insufficient for a reliable automated evaluation.
 
-🏗️ Architecture
+## 🏗️ Architecture
 
 The application follows a modular service-oriented architecture.
 
+```text
                          Frontend
                             │
                             ▼
                        FastAPI API
                             │
-             ┌──────────────┼──────────────┐
-             │              │              │
-             ▼              ▼              ▼
-       Feature Routes   Screening Route   Health
-             │              │
-             │              ▼
-             │       Screening Worker
-             │              │
-             │       ┌──────┼──────┐
-             │       │      │      │
-             │       ▼      ▼      ▼
-             │   Analysis Matching Gaps
-             │       │      │      │
-             │       └──────┼──────┘
-             │              │
-             │       ┌──────┴──────┐
-             │       ▼             ▼
-             │  Improvements   Interview Prep
-             │       │             │
-             └───────┴──────┬──────┘
-                            │
-                            ▼
-                     LLM Service
-                            │
-                            ▼
-                     Google Gemini
-                            │
-                            ▼
-                  Pydantic Validation
-                            │
-                            ▼
+              ┌─────────────┼─────────────┐
+              │             │             │
+              ▼             ▼             ▼
+        Feature Routes  Screening Route  Health
+              │             │
+              │             ▼
+              │       Screening Worker
+              │             │
+              │      ┌──────┼──────┐
+              │      │      │      │
+              │      ▼      ▼      ▼
+              │   Analysis Matching Gaps
+              │      │      │      │
+              │      └──────┼──────┘
+              │             │
+              │      ┌──────┴──────┐
+              │      ▼             ▼
+              │ Improvements  Interview Prep
+              │      │             │
+              └──────┴──────┬──────┘
+                             │
+                             ▼
+                       LLM Service
+                             │
+                             ▼
+                      Google Gemini
+                             │
+                             ▼
+                   Pydantic Validation
+                             │
+                             ▼
                   Structured AI Output
 Separation of Responsibilities
 Routes handle HTTP requests and responses.
@@ -306,10 +307,15 @@ AI-Resume-Matcher/
 │
 ├── docs/
 │   └── images/
-│       ├── analyze-page.png
-│       ├── candidate-dashboard.png
-│       ├── candidate-evaluation.png
-│       └── analysis-history.png
+│       ├── home-page.png
+│       ├── resume-upload.png
+│       ├── job-description.png
+│       ├── match-score.png
+│       ├── candidate-assessment.png
+│       ├── matched-skills.png
+│       ├── skill-gaps.png
+│       ├── improvement-suggestions.png
+│       └── interview-preparation.png
 │
 ├── AI_Screening_Worker_Assignment.md
 ├── .env.example
@@ -336,14 +342,22 @@ Health Check	GET	/health	—
 When the application is running, FastAPI provides interactive API documentation.
 
 Swagger UI
-Local
+
+Local:
+
 http://127.0.0.1:8000/docs
-Deployed
+
+Deployed:
+
 https://ai-resume-matcher-fq06.onrender.com/docs
 OpenAPI Specification
-Local
+
+Local:
+
 http://127.0.0.1:8000/openapi.json
-Deployed
+
+Deployed:
+
 https://ai-resume-matcher-fq06.onrender.com/openapi.json
 
 Swagger UI can be used to:
@@ -442,6 +456,7 @@ Potentially significant concerns are surfaced for recruiter verification.
 🚀 Getting Started
 1. Clone the Repository
 git clone https://github.com/mansikanchan2003/AI-Resume-Matcher.git
+
 cd AI-Resume-Matcher
 2. Create a Virtual Environment
 
@@ -517,7 +532,7 @@ Run:
 
 pyrefly check
 
-Expected result:
+Current result:
 
 INFO 0 errors
 📡 API Request Examples
@@ -647,11 +662,9 @@ Mansi Kanchan
 
 B.Tech — Computer Science & Engineering
 
-GitHub:
-https://github.com/mansikanchan2003
+GitHub: github.com/mansikanchan2003
 
-LinkedIn:
-https://www.linkedin.com/in/mansi-kanchan-7924b0196
+LinkedIn: linkedin.com/in/mansi-kanchan-7924b0196
 
 ⭐ Project Goal
 
@@ -666,6 +679,4 @@ Prepare for interviews.
 Perform structured first-pass candidate screening.
 Surface potential concerns for human verification.
 
-The project demonstrates the integration of:
-
-FastAPI, Google Gemini, Pydantic validation, modular services, workflow orchestration, frontend API integration, automated testing, and human-in-the-loop AI design.
+The project demonstrates the integration of FastAPI, Google Gemini, Pydantic validation, modular services, workflow orchestration, frontend API integration, automated testing, and human-in-the-loop AI design.

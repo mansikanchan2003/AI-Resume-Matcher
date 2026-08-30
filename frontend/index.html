@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
     content="TalentPulse AI — Enterprise AI-powered resume and job description cognitive matcher, skill gap auditor, and candidate evaluation platform." />
-  <title>TalentPulse AI | Enterprise Recruitment & Candidate Intelligence</title>
+  <title>TalentPulse AI | Recruiting Intelligence Workspace</title>
   <link rel="icon" href="/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -45,7 +45,7 @@
           </div>
           <div class="brand-meta">
             <span class="brand-title">TalentPulse AI</span>
-            <span class="brand-subtitle">Enterprise Recruitment</span>
+            <span class="brand-subtitle">AI Recruiting Intelligence</span>
           </div>
         </div>
 
@@ -149,7 +149,7 @@
               <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
           </button>
-          <span class="current-view-title" id="current-view-title">Candidate Intelligence Workspace</span>
+          <span class="current-view-title" id="current-view-title">Talent Intelligence Workspace</span>
         </div>
 
         <div class="top-navbar-right">
@@ -181,10 +181,10 @@
       <section class="view-content" id="view-analyze">
 
         <div class="workspace-header">
-          <h1>Candidate Intelligence <span class="highlight-text">Workspace</span></h1>
+          <h1>Review candidate <span class="highlight-text">fit</span></h1>
           <p class="workspace-subtitle">
-            Upload a candidate's resume and define the target job description to initiate our cognitive evaluation
-            engine. The AI will cross-reference skills, experience trajectory, and gap probabilities in real-time.
+            Add a resume, share the role you’re hiring for, and let the team review how well the candidate matches the
+            job—without losing the human context behind the numbers.
           </p>
         </div>
 
@@ -199,7 +199,7 @@
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                   <polyline points="14 2 14 8 20 8"></polyline>
                 </svg>
-                Candidate Resume Dossier
+                Candidate Resume
               </span>
               <span class="file-meta-tag" id="file-size-tag">PDF, DOCX, TXT</span>
             </div>
@@ -212,9 +212,9 @@
                   <line x1="12" y1="3" x2="12" y2="15"></line>
                 </svg>
               </div>
-              <h3 class="dropzone-title">Drag & Drop Resume</h3>
+              <h3 class="dropzone-title">Drop a resume here</h3>
               <p class="dropzone-subtext">PDF, DOCX, or TXT up to 10MB</p>
-              <button type="button" class="btn-select-file" id="btn-select-file">Select File Manually</button>
+              <button type="button" class="btn-select-file" id="btn-select-file">Choose file</button>
               <input type="file" id="resume-file-input" accept=".pdf,.docx,.txt" class="hidden" />
             </div>
 
@@ -246,7 +246,7 @@
                   <circle cx="12" cy="12" r="6"></circle>
                   <circle cx="12" cy="12" r="2"></circle>
                 </svg>
-                Target Role
+                Role you’re hiring for
               </label>
               <input type="text" class="target-role-input" id="target-role-input"
                 placeholder="e.g. Senior Frontend Engineer" value="Senior Backend Engineer" />
@@ -261,7 +261,7 @@
                   <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
                   <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
                 </svg>
-                Job Description Context
+                Job description
               </span>
               <button type="button" class="file-meta-tag" id="btn-clear-jd"
                 style="cursor: pointer; background: none; border: none;">Clear</button>
@@ -276,8 +276,8 @@
         <!-- Benchmark Profiles Quick Pick -->
         <div class="benchmark-section">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-            <span class="benchmark-label" style="margin-bottom: 0;">Try Quick-Start Benchmark Profiles</span>
-            <span class="badge-source-tag badge-source-demo">Demo Dossiers • Triggers Real AI Analysis</span>
+            <span class="benchmark-label" style="margin-bottom: 0;">Try starter profiles</span>
+            <span class="badge-source-tag badge-source-demo">Demo examples • runs a real review</span>
           </div>
           <div class="benchmark-cards-row">
             <button class="benchmark-card" id="btn-load-backend-sample">
@@ -288,9 +288,9 @@
                 </svg>
               </div>
               <div class="benchmark-info">
-                <span class="benchmark-card-badge">Quick Start Sample</span>
+                <span class="benchmark-card-badge">Starter profile</span>
                 <h4>Software Engineer</h4>
-                <p>Cloud Platform & Backend (AWS/FastAPI)</p>
+                <p>Cloud platform & backend work</p>
               </div>
             </button>
 
@@ -303,9 +303,9 @@
                 </svg>
               </div>
               <div class="benchmark-info">
-                <span class="benchmark-card-badge">Quick Start Sample</span>
+                <span class="benchmark-card-badge">Starter profile</span>
                 <h4>Frontend Architect</h4>
-                <p>React, TypeScript & WebGL Ecosystem</p>
+                <p>React, TypeScript & web interfaces</p>
               </div>
             </button>
 
@@ -317,9 +317,9 @@
                 </svg>
               </div>
               <div class="benchmark-info">
-                <span class="benchmark-card-badge">Quick Start Sample</span>
+                <span class="benchmark-card-badge">Starter profile</span>
                 <h4>Marketing Manager</h4>
-                <p>B2B SaaS Growth & Performance</p>
+                <p>Growth, messaging & product marketing</p>
               </div>
             </button>
           </div>
@@ -328,7 +328,7 @@
         <!-- Action CTA Row -->
         <div class="action-cta-bar">
           <button type="button" class="btn-start-analysis" id="analyse-btn">
-            <span id="btn-label">Start Cognitive Analysis</span>
+            <span id="btn-label">Start review</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
@@ -342,20 +342,20 @@
         <!-- Loading Progress Stepper Card -->
         <div class="analysis-loading-card hidden" id="analysis-loading-card">
           <div class="loading-spinner-ring"></div>
-          <h3 class="loading-title">Conducting Deep Cognitive Evaluation</h3>
+          <h3 class="loading-title">Gathering the fit review</h3>
           <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto;">
-            Our Gemini AI model is synthesizing semantic competencies, evaluating resume claims against JD requirements,
-            and generating recruiter STAR recommendations.
+            We’re checking the resume against the role, highlighting strengths, and flagging where a recruiter should
+            ask a follow-up question.
           </p>
           <div class="loading-steps">
             <div class="loading-step-item active" id="step-1">
-              <span>1. Parsing Dossier</span>
+              <span>1. Reading the resume</span>
             </div>
             <div class="loading-step-item" id="step-2">
-              <span>2. Cross-referencing Skills</span>
+              <span>2. Matching key skills</span>
             </div>
             <div class="loading-step-item" id="step-3">
-              <span>3. Synthesizing Insights</span>
+              <span>3. Preparing the summary</span>
             </div>
           </div>
         </div>
